@@ -1,0 +1,36 @@
+name: ffmpeg-bot
+
+services:
+  - name: ffmpeg-bot
+    type: WEB
+    instance_type: nano
+    regions:
+      - was
+    ports:
+      - port: 8000
+        protocol: http
+    routes:
+      - path: /
+        port: 8000
+    health_checks:
+      - http:
+          path: /health
+          port: 8000
+    docker:
+      dockerfile: Dockerfile
+    env:
+      - key: BOT_TOKEN
+        scope: build_and_runtime
+        type: secret
+      - key: APP_ID
+        scope: build_and_runtime
+        type: secret
+      - key: APP_HASH
+        scope: build_and_runtime
+        type: secret
+      - key: OWNER_ID
+        scope: build_and_runtime
+        type: secret
+      - key: PORT
+        scope: build_and_runtime
+        value: "8000"
