@@ -11,16 +11,15 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy source
-COPY src/ ./src/
+# Copy ALL source files (src/ and presets/ and everything else)
+COPY src/ .
+COPY presets/ ./presets/
 
 # Temp directory for conversions
 RUN mkdir -p /app/tmp
 
 ENV PORT=8000
-
 EXPOSE 8000
 
-WORKDIR /app/src
-
+# Run from /app — all .py files are here directly
 CMD ["python", "bot.py"]
