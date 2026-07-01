@@ -17,9 +17,10 @@ COPY src/ ./src/
 # Temp directory for conversions
 RUN mkdir -p /app/tmp
 
-ENV PYTHONPATH=/app/src
 ENV PORT=8000
 
 EXPOSE 8000
 
-CMD ["python", "src/bot.py"]
+WORKDIR /app/src
+
+CMD ["python", "bot.py"]
